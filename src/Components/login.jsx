@@ -3,9 +3,13 @@ import { Form, Button } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import {useNavigate} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify'
+import {useSelector,useDispatch} from 'react-redux'
+
+
 
 function LoginUser(props)
 {
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const [incorrectPasswordCount,setIncorrectPasswordCount] = useState(0);
     const [email,setEmail] = useState("");
@@ -34,6 +38,8 @@ function LoginUser(props)
         {
           showSuccessAlert()
           //toast.success('You have signed in successfully!');
+         // dispatch(loginUser(loginUser))
+          //console.log(loginUser)
           navigate("/dashboard")
         }
         else{

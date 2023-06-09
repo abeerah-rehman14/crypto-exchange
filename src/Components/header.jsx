@@ -7,12 +7,17 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Badge } from 'react-bootstrap';
 import { BsFilePost } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 function Header({blogCount}) {
+
+//  useSelector(state=> console.log(state))
+  const username = useSelector(state => state.loginUserReducer.loginUser.name)
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand>Welcome to Crypto Exchange</Navbar.Brand>
+        <Navbar.Brand>Welcome to Crypto Exchange, {username} !</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -20,6 +25,8 @@ function Header({blogCount}) {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/blogs">Blogs</Nav.Link>
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             {/* <NavDropdown title="Features" id="navbarScrollingDropdown">

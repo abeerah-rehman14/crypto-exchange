@@ -1,363 +1,83 @@
-
-import React, { useEffect , useState }from 'react';
-import { Table, Tag, Button, Modal , Form, Input, Alert, Space} from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import { ExclamationCircleFilled,PlusCircleOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
 import Header from './header';
 import Footer from './footer';
-const { confirm } = Modal;
-
-const data = [
-  {
-    key: 1,
-    title: 'Alt coins',
-    author: 'Jim Green',
-    subTitle: 'Altcoin refers to any alternative cryptocurrency to Bitcoin.',
-  },
-  {
-    key: 3,
-    author: 'Joe Black',
-    title: 'Bitcoin Mining',
-    subTitle: 'What it is? How does it work?',
-  },
-];
+import CoinCard from './coinCard';
+import { Button, Col, Row, Statistic } from 'antd';
+import axios from 'axios';
+import api from '../environment/data'
+import {useSelector,useDispatch} from 'react-redux'
+import {getUser} from '../reduxToolkit/userReducer'
+import { fetchUserData } from '../reduxToolkit/userReducer';
+import {toolkitStore} from '../reduxToolkit/toolkitStore'
+import { Provider } from 'react-redux';
 
 function Dashboard()
 {
-  
-    
+    // const { user } = useSelector((state)=>state.user)
+    // const { status } = useSelector((state)=>state.user)
 
-    let item =  {
-        key: 0,
-        author: '',
-        title: '',
-        subTitle: '',
-      }
 
-    const [form] = Form.useForm()  
-    const [blogData,setBlogData] = useState(data)
-    const [selectedItemData, setSeletedItemData] = useState(item)
-    const [selectedEditItemData, setSelectedEditItemData] = useState(item)
-    const [viewModal,setViewModal] = useState(false)
-    const [addModal,setAddModal] = useState(false)
-    const [editModal,setEditModal] = useState(false)
-    const [successMsg,setSuccessMsg] = useState("")
-    const [showAlert,setShowAlert] = useState(false)
-    const [successAlert,setSuccessAlert] = useState(false)
+    const dispatch = useDispatch();
 
-    const columns  = [
+
+    const [coinRates,setCoinRates] = useState({})
+    const [coinDetails,setCoinDetails] = useState([])
+    const [coinDetailsLength,setCoinDetailsLength] = useState(0)
+
+    const getLiveCoinData = async () => {
+        const response = await api.get("/coins")
+        setCoinRates(response.data.rates)
+
+        const res = await axios.get('https://api.binance.com/api/v3/ticker/24hr')
+        if(res.status == 200)
         {
-          title: 'ID',
-          dataIndex: 'key',
-          key: 'key',
-        },
-        {
-          title: 'Title',
-          dataIndex: 'title',
-          key: 'title',
-        },
-        {
-          title: 'Sub Title',
-          dataIndex: 'subTitle',
-          key: 'subTitle',
-        },
-        {
-          title: 'Author',
-          dataIndex: 'author',
-          key: 'author',
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (_, record) => (
-            <Space size="middle">
-              {/* <a>Invite {record.name}</a> */}
-              <Button type= "primary" onClick={()=> {viewBlog(record)}}>View</Button>
-              <Button onClick={()=>{editBlog(record)}}>Edit</Button>
-              <Button danger onClick={() => { deleteBlog(record)}}> Delete</Button>
-            </Space>
-          ), //
-        },
-      ];
+            setCoinDetails(res.data)
+            setCoinDetailsLength(res.data.length)
+        }
 
 
-
-      useEffect(() => {
-        form.setFieldsValue(selectedEditItemData)
-       }, [form, selectedEditItemData, blogData])
-     
-
-
-    const deleteBlog = (record) => {
-        confirm({
-          title: 'Delete Blog',
-          icon: <ExclamationCircleFilled />,
-          content: 'Do you really want to delete this blog?',
-          okText: 'Yes',
-          okType: 'danger',
-          cancelText: 'No',
-          onOk() {
-            deleteItem(record);
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-    };
-    
-    const viewBlog = (record) => {
-        console.log(record)
-        setSeletedItemData(record)
-        setViewModal(true)        
-    };
-
-    const onCancelView = () =>
-    {
-        setSeletedItemData(null)
-        setViewModal(false)
-    };
-
-    const addBlog = () => {
-        setAddModal(true)
-    }
-    const onCloseAddBlogModal = () =>
-    {
-        setAddModal(false)
-    };
-    const onFinish = (values) => {
-        values.key = Math.floor(Math.random() * 100);
-        setBlogData([...blogData,values])
-        onCloseAddBlogModal()
-        setShowAlert(true)
-        setSuccessAlert(true)
-        setSuccessMsg("Blog has been added successfully!")
-        console.log('Success:', values);
-      };
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
-
-    const deleteItem = (record) => {
-       let filteredData = blogData.filter(data => data.key !== record.key )
-       console.log(filteredData)
-       setBlogData(filteredData)
     }
 
-    const onClose = (e) => {
-        setShowAlert(false)
-        setSuccessAlert(false)
-        setSuccessMsg("")
-      };
 
-    const editBlog = (record) => {
-        setSelectedEditItemData(record)
-        setEditModal(true)
-        console.log(selectedEditItemData,record)
-        
-    };
+    useEffect(()=>{
+        // dispatch(getUser())
+     getLiveCoinData()
+    //    if(status === "idle")
+    //    {
+    //     dispatch(fetchUserData())
+    //     console.log(user)   
+    //    }
 
-    const onCloseEditBlogModal = () =>
-    {
-        setSelectedEditItemData(null)
-        setEditModal(false)
-    }
 
-    const onFinishEdit = (record) => {
-        console.log(blogData)
-        let updatedData = blogData
-        let index = updatedData.findIndex(data => data.key === selectedEditItemData.key)
-        record.key = selectedEditItemData.key
-        updatedData[index] = record
-        console.log(updatedData)
-        setBlogData(updatedData)
-        setEditModal(false)
-    }
+    },[])
 
-    const onFinishEditFailed = (errorInfo) => {
-        console.log(errorInfo)
-    }
-    
-    
+
     return(
         <>
         <Header/>
-        <Button icon = {<PlusCircleOutlined />} onClick={()=>{addBlog()}}>Add new blog</Button>
-        <Table columns={columns} dataSource={[...blogData]} />
+        {/* <p>{user[0]?.name}</p>
+        <p>{user[0]?.email}</p> */}
+        <Row gutter={16}>
+        <Col span={4} offset={6}>
+        <Statistic title="BITCOIN" value={coinRates.BTC} precision={2}/>
+        </Col>
+        <Col span={4}>
+        <Statistic title="LITECOIN" value={coinRates.LTC} precision={2} />
+        </Col>
+        <Col span={4}>
+        <Statistic title="ETHEREUM" value={coinRates.ETH} precision={2} />
+        <Button style={{ marginTop: 16,}} >
+        Refresh
+        </Button>
+        </Col>
+        </Row>
 
-        
-             <Modal title="Blog details" open={viewModal} onOk={onCancelView} onCancel={onCancelView}>
-             <p>Title:  {selectedItemData?.title}</p>
-             <p>Sub-Title:  {selectedItemData?.subTitle}</p>
-             <p>Author:  {selectedItemData?.author}</p>
-            </Modal>
-
-            <Modal title="Add Blog details" open={addModal} onCancel={onCloseAddBlogModal}
-            footer={[<Button key="back" onClick={onCloseAddBlogModal}> Cancel</Button>]}>
-            <Form
-            name="add"
-            labelCol={{
-            span: 8,
-            }}
-            wrapperCol={{
-            span: 16,
-            }}
-            style={{
-            maxWidth: 400,
-            }}
-            initialValues={{
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            >
-            <Form.Item
-            label="Title"
-            name="title"
-            rules={[
-                {
-                required: true,
-                message: 'Please enter blog title!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-
-            <Form.Item
-            label="Sub title"
-            name="subTitle"
-            rules={[
-                {
-                required: true,
-                message: 'Please enter sub-title!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-            <Form.Item
-            label="Author"
-            name="author"
-            rules={[
-                {
-                required: true,
-                message: 'Please enter author name!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-            <Form.Item
-            wrapperCol={{
-                offset: 8,
-                span: 16,
-            }}
-            >
-            <Button type="primary" htmlType="submit">
-                Submit
-            </Button>
-            </Form.Item>
-        </Form>
-            </Modal>
-
-            <Modal title="Edit Blog details" open={editModal} onCancel={onCloseEditBlogModal}
-            footer={[<Button key="back" onClick={onCloseEditBlogModal}> Cancel</Button>]}>
-            <Form
-            form={form}
-            name="edit"
-            labelCol={{
-            span: 8,
-            }}
-            wrapperCol={{
-            span: 16,
-            }}
-            style={{
-            maxWidth: 400,
-            }}
-            initialValues={selectedEditItemData
-            }
-            onFinish={onFinishEdit}
-            onFinishFailed={onFinishEditFailed}
-            autoComplete="off"
-            >
-            <Form.Item
-            label="Title"
-            name="title"
-            rules={[
-                {
-                required: true,
-                message: 'Please enter blog title!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-
-            <Form.Item
-            label="Sub title"
-            name="subTitle"
-            rules={[
-                {
-                required: true,
-                message: 'Please enter sub-title!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-            <Form.Item
-            label="Author"
-            name="author"
-            rules={[
-                {
-                required: true,
-                message: 'Please enter author name!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-            <Form.Item
-            wrapperCol={{
-                offset: 8,
-                span: 16,
-            }}
-            >
-            <Button type="primary" htmlType="submit">
-                Submit
-            </Button>
-            </Form.Item>
-        </Form>
-            </Modal>
-
-        {showAlert && (
-                  <Space
-                  direction="vertical"
-                  style={{
-                  width: '100%',
-                  }}>
-                {successAlert &&(
-                      <Alert 
-                      message={successMsg}
-                      type="success"
-                      closable
-                      onClose={onClose}
-                      />
-                )}
-              </Space>
-          )}
-
-        
+        <Provider store={toolkitStore}>
+            <CoinCard></CoinCard>
+        </Provider>
         <Footer/>
         </>
     )
-    
-
-  
-
-
 }
-
-
 
 export default Dashboard;
