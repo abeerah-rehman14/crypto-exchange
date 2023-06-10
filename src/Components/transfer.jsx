@@ -3,14 +3,17 @@ import Header from './header';
 import Footer from './footer';
 import { DownOutlined, UserOutlined } from '@ant-design/icons'
 import api from '../environment/data'
-import { Button, Checkbox, Form, Input, Space , message,  Dropdown, Select, InputNumber} from 'antd';
+import { Button, Form, Input, Space , message,  Dropdown, Select, InputNumber, notification } from 'antd';
 const { Option } = Select;
 
-function Transfer()
+function Transfer({route,navigation})
 {
 
-    const [form] = Form.useForm();
+    const { coinId } = route.params;
 
+    const [messageApi, contextHolder] = message.useMessage();
+    const key = 'updatable';
+    const [form] = Form.useForm();
     const [userData,setUserData] = useState({})
     const [coinData,setCoinData] = useState([])
     const [transferAddress,setTransferAddress] = useState([])
@@ -43,7 +46,7 @@ function Transfer()
     }
 
      useEffect(()=>{
-        getData()
+       // getData()
     },[])
 
      const setCoinMaxLimit = (coinValue)=>{
@@ -84,11 +87,32 @@ function Transfer()
        console.log(response)
        const res = await api.put(`/users/${selectedCoin.addressId}`, userData[selectedCoin.addressId]);
        console.log(res)
+       if(res.status === 200)
+       {
+        openMessage()
+        form.resetFields()
+       }
 
       };
 
       const onReset = () => {
         form.resetFields();
+      };
+
+      const openMessage = () => {
+        messageApi.open({
+          key,
+          type: 'loading',
+          content: 'Loading...',
+        });
+        setTimeout(() => {
+          messageApi.open({
+            key,
+            type: 'success',
+            content: 'Your coins have been transfered successfully!',
+            duration: 6,
+          });
+        }, 1000);
       };
 
    
@@ -136,10 +160,7 @@ function Transfer()
         </Select>
         </Form.Item>
 
-        <Form.Item label="Amount"
-    
-
-        >
+        <Form.Item label="Amount">
         <Form.Item 
         //  wrapperCol={{
         //     // offset: 8,

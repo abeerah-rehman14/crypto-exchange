@@ -1,33 +1,54 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Form, Button } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import {useNavigate} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify'
 import {useSelector,useDispatch} from 'react-redux'
+import { updateLoginUser } from '../reduxToolkit/loginUserReducer';
+import { fetchUserData } from '../reduxToolkit/userReducer';
 
 
 
-function LoginUser(props)
+
+
+function LoginUser()
 {
     const dispatch = useDispatch();
     const navigate = useNavigate()
+
     const [incorrectPasswordCount,setIncorrectPasswordCount] = useState(0);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-
-    const blockedList = []
-    const [blockedUser, setBlockedUser] = useState(blockedList);
-
+    const [registeredUser, setRegisteredUser] = useState([]);    
+    const [blockedUser, setBlockedUser] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+    const { registeredUsers } = useSelector((state)=>state.users)
+    const { status } = useSelector((state)=>state.users)
+
+  
+    useEffect(()=>{
+      dispatch(fetchUserData())
+
+   },[dispatch])
 
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      
-      console.log(props.registeredUsers)
+
+
+
+      if(status === "success"){
+        console.log("here")
+         registeredUsers.forEach(element => {
+          registeredUser.push(element)          
+         });
+
+      }
+
        let checkBlockList = blockedUser.findIndex(user => user.email === email)        
-       let loginUser = props.registeredUsers.find(user => user.email === email)
+       let loginUser = registeredUser.find(user => user.email === email)
        if(checkBlockList >= 0)
        {
         showErrorMessageAlert("Due to incorrect password, " +loginUser.name+ ": your account has been blocked")
@@ -37,9 +58,7 @@ function LoginUser(props)
         if(loginUser.password === password)
         {
           showSuccessAlert()
-          //toast.success('You have signed in successfully!');
-         // dispatch(loginUser(loginUser))
-          //console.log(loginUser)
+          dispatch(updateLoginUser(loginUser))
           navigate("/dashboard")
         }
         else{
@@ -60,10 +79,9 @@ function LoginUser(props)
        }
     };
 
+
     const onRegister = () =>{
-
       navigate("/signup")
-
     }
 
 
@@ -88,6 +106,8 @@ function LoginUser(props)
 
 
     return(
+      <>
+        <h3>Crypto Exchange</h3>
         <div className="container row">
         <div className="col-6 mx-auto portal-form">
           <h3>Sign in</h3>
@@ -147,6 +167,7 @@ function LoginUser(props)
           </Form>
         </div>
       </div>
+      </>
     )
 }
 

@@ -12,7 +12,7 @@
           "id": 0,
           "key": 0,
           "name": "Bitcoin",
-          "totalAmount": 450
+          "totalAmount": 442
         },
         {
           "id": 1,
@@ -46,7 +46,7 @@
           "id": 0,
           "key": 0,
           "label": "Bitcoin",
-          "totalAmount": 750
+          "totalAmount": 758
         },
         {
           "id": 1,
@@ -64,9 +64,50 @@
         {
           "key": 2,
           "label": "Mr. Harry",
-          "value": "810"
+          "value": "81SS0"
         }
       ]
+    },
+    {
+      "name": "sara khan",
+      "email": "test@test.com",
+      "password": "1234567890",
+      "address": "abc",
+      "cnic": "base64",
+      "id": 2
+    },
+    {
+      "name": "test user",
+      "email": "test@user.com",
+      "password": "1234567890",
+      "address": "cbc",
+      "coins": [
+        {
+          "id": 0,
+          "key": 0,
+          "label": "Bitcoin",
+          "totalAmount": 758
+        },
+        {
+          "id": 1,
+          "key": 1,
+          "label": "Altcoin",
+          "totalAmount": 800
+        }
+      ],
+      "transferAddress": [
+        {
+          "key": 0,
+          "label": "Allen Walker",
+          "value": "710"
+        },
+        {
+          "key": 1,
+          "label": "Andrew Ng",
+          "value": "81SS0"
+        }
+      ],
+      "id": 3
     }
   ],
   "coins": {

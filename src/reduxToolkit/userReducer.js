@@ -3,7 +3,7 @@ import axios from 'axios'
 import api from '../environment/data'
 
 const initialState = {
-  user: [],
+  registeredUsers: [],
   status: "idle",
   error: ""
   
@@ -12,7 +12,7 @@ const initialState = {
 export const fetchUserData = createAsyncThunk("user/fetchUser", async ()=>{
     try{
         const res = await api.get("/users")
-        return {...res.data}
+        return [...res.data]
     }
     catch(err){
         return err.message
@@ -24,31 +24,31 @@ export const userSlice = createSlice({
   name: 'userReducer',
   initialState,
   reducers: {
-    getUser: (state) => {
+    // getUser: (state) => {
     
-      state.user = { 
-      "id": 0,
-      "name": "Abeera Rehman",
-      "email": "abeerah.rehman@systemsltd.com",
-      "password": "P@ssw0rd",
-      "address": "address",
-      "cnic": "base64"
-    }
-    },
-    updateUser: (state, action) => {
-      state.user = action.payload
-    },
+    //   state.user = { 
+    //   "id": 0,
+    //   "name": "Abeera Rehman",
+    //   "email": "abeerah.rehman@systemsltd.com",
+    //   "password": "P@ssw0rd",
+    //   "address": "address",
+    //   "cnic": "base64"
+    // }
+    // },
+    // updateUser: (state, action) => {
+    //   state.user = action.payload
+    // },
   },
   extraReducers(builder){
     builder
-    .addCase(fetchUserData.pending, (state,action)=>{
+    .addCase(fetchUserData.pending, (state=initialState,action)=>{
         state.status = "loading"
     })
-    .addCase(fetchUserData.fulfilled,(state,action)=>{
+    .addCase(fetchUserData.fulfilled,(state=initialState,action)=>{
         state.status = "success"
-        state.user = action.payload
+        state.registeredUsers = action.payload
     })
-    .addCase(fetchUserData.rejected,(state,action)=>{
+    .addCase(fetchUserData.rejected,(state=initialState,action)=>{
         state.status = "failure"
         state.error = action.error.message
 

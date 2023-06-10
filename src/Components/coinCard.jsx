@@ -15,32 +15,30 @@ function CoinCard()
     const navigate = useNavigate()
     const cols = []
     
-    useSelector(state => console.log(state))
+    //useSelector(state => console.log(state))
  
-     const { user } = useSelector((state)=>state.user)
-     const { status } = useSelector((state)=>state.user)
+    const { loginUser } = useSelector((state)=>state.loginUserReducer)
 
     const dispatch = useDispatch();
     
     const getData = async () =>
     {
-        const res = await api.get("/users")
-        console.log(res.data[0])
-        setCoinData(res.data[0].coins)    
-        setCoinLayout()
-        console.log(colData)  
+        console.log(loginUser.coins)
+        setCoinData([])
+        loginUser?.coins?.forEach(element => {
+            coinData.push(element)      
+        });  
     }
 
     const setCoinLayout = () =>
     {
-        //console.log("called")
         for (let i = 0; i < coinData.length; i++) {
             cols.push(
               <Col key={i.toString()} span={24}>
-                <Card title={coinData[i].name} size="small">
+                <Card title={coinData[i].label} size="small">
                     <h6>Total Count</h6>
                     <p>{coinData[i].totalCount}</p>
-                    <Button onClick={tranfer} style={{ color: "green"}}>Transfer</Button>
+                    <Button onClick={tranfer(coinData.id)} style={{ color: "green"}}>Transfer</Button>
                 </Card>
               </Col>
             );
@@ -48,28 +46,14 @@ function CoinCard()
           setColData(cols)
     }
 
-   
-
-
-
     useEffect(()=>{
        getData();
-       if(status === "idle")
-       {
-        dispatch(fetchUserData())
-        console.log(user)   
-       }
-    },[status,dispatch])
+    },[])
 
-    // useEffect( ()=> {
-    //     console.log("child comp called")
-    //    // getData();
-    //    // setCoinLayout();
-    // },[])
 
-    const tranfer = () =>
+    const tranfer = (coinId) =>
     {
-        navigate("/transferCoin")
+        navigate("/transferCoin",{coinId:coinId})
 
 
     }
@@ -89,7 +73,7 @@ function CoinCard()
    
             <Row gutter={[16, 8]}>
             {
-             coinData && coinData.map((coin,i)=>{
+             coinData && coinData?.map((coin,i)=>{
                 return(
                 <Col key={i} span={12}> 
                 <Card title={coin.name} size="small">

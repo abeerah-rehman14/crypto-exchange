@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import {useNavigate} from "react-router-dom"
+import api from '../environment/data'
 
-function RegisterUser({addUser})
+
+function RegisterUser()
 {
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
@@ -23,12 +25,40 @@ function RegisterUser({addUser})
           showErrorMessageAlert('Password length should be atleast 10 characters.');
           return;
         }
+        setName("")
+        setPassword("")
+        setEmail("")
+        setAddress("")
+        setCnic("")
 
-        addUser({name: name,email: email,password: password,address: address,cnic:"base64"})
-       // console.log("here",name,email)
-        navigate("/")
+        handleAddUser({name: name,email: email,password: password,address: address,cnic:cnic})
 
+        
+    };
+
+    const handleAddUser = async (newUser) => {
+      newUser["id"] = 0
+      newUser["coins"]= [
+        { "id": 0,"key": 0,"label": "Bitcoin", "totalAmount": 758 },
+        { "id": 1, "key": 1, "label": "Altcoin", "totalAmount": 800 }
+      ]
+      newUser["transferAddress"]= [
+        { "key": 0, "label": "Allen Walker"},
+        { "key": 1, "label": "Andrew Ng"}
+      ]
+      let response = await api.post("/users",newUser)
+      console.log(response)
+      if(response.status === 201)
+      {
         showSuccessAlert()
+        navigate("/")
+      }
+      else{
+        showErrorMessageAlert('Something went wrong, user can not be registered.');
+        return
+      }
+     
+  
     };
 
 
@@ -48,6 +78,7 @@ function RegisterUser({addUser})
 
 
     return(
+      <>  <h3>Crypto Exchange</h3> 
         <div className="container row">
         <div className="col-6 mx-auto">
           <h3>Sign up</h3>
@@ -130,6 +161,7 @@ function RegisterUser({addUser})
           
         </div>
       </div>
+      </> 
     )
 }
 

@@ -11,13 +11,13 @@ import { useSelector } from 'react-redux';
 
 function Header({blogCount}) {
 
-//  useSelector(state=> console.log(state))
+  //useSelector(state=> console.log(state))
   const username = useSelector(state => state.loginUserReducer.loginUser.name)
 
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand>Welcome to Crypto Exchange, {username} !</Navbar.Brand>
+        <Navbar.Brand>Welcome to Crypto Exchange, {username}  !</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -29,33 +29,16 @@ function Header({blogCount}) {
             <Nav.Link href="/blogs">Blogs</Nav.Link>
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
-            {/* <NavDropdown title="Features" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown> */}
+           
           </Nav>
-          {/* <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
+         
 
-          {/* <div style={{ position: 'relative', display: 'inline-block' }}>
+          <div style={{ position: 'relative', display: 'inline-block' }}>
           <BsFilePost size={37} style={{color: 'darkolivegreen'}}/>
           <Badge pill style={{ position: 'absolute', bottom: -5, right: -5 }}>
-            {blogCount}
+            
           </Badge>
-        </div> */}
+        </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

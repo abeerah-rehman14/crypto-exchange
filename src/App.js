@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BaseComponent from './Components/baseComponent';
 import {BrowserRouter as Router,Routes, Route} from 'react-router-dom'
 import RegisterUser from './Components/register';
@@ -11,46 +11,18 @@ import About from './Components/about';
 import Home from './Components/home';
 import Transfer from './Components/transfer';
 import { ToastContainer } from 'react-toastify';
+import { fetchUserData } from './reduxToolkit/userReducer';
+import {useSelector,useDispatch} from 'react-redux'
+
 
 
 function App() {
 
-  const defaultUsers = [
-    {
-     name: "Abeera Rehman",
-     email: "abeerah.rehman@systemsltd.com",
-     password: "P@ssw0rd",
-     address: "address",
-     cnic: "base64"      
-    },
-    
-   
- 
-  ];
-  const [users, setUsers] = useState(defaultUsers);
-
-  const handleAddUser = (newUser) => {
-    console.log(newUser)
-    setUsers([...users, newUser]);
-    //users.push(newUser)
-    //setUsers([users]);
-    console.log(users)
-
-  };
-
-  const handleDeleteUser = (index) => {
-    //users.splice(index,1)
-
-  };
-
   return (
     <div className="App">
-        
-
-  
       <Routes>
-        <Route path="/" element = {<LoginUser registeredUsers={users}/>}></Route>
-        <Route path="/signup" element = {<RegisterUser addUser = {handleAddUser}/>}></Route>
+        <Route path="/" element = {<LoginUser/>}></Route>
+        <Route path="/signup" element = {<RegisterUser/>}></Route>
         <Route path="/dashboard" element = {<Dashboard/>}></Route>
         <Route path="/transferCoin" element = {<Transfer/>}></Route>
         <Route path="/blogs" element = {<Blogs/>}></Route>

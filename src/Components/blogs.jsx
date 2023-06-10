@@ -15,9 +15,27 @@ const data = [
     subTitle: 'Altcoin refers to any alternative cryptocurrency to Bitcoin.',
   },
   {
-    key: 3,
+    key: 2,
     author: 'Joe Black',
     title: 'Bitcoin Mining',
+    subTitle: 'What it is? How does it work?',
+  },
+  {
+    key: 3,
+    author: 'John Wick',
+    title: 'Cointelegraph',
+    subTitle: 'Trending topics of the crypto world',
+  },
+  {
+    key: 4,
+    author: 'Alex Ben',
+    title: 'Coinbound',
+    subTitle: 'Crypto digital marketing',
+  },
+  {
+    key: 5,
+    author: 'Bobby Ong ',
+    title: 'CoinGecko',
     subTitle: 'What it is? How does it work?',
   },
 ];
@@ -181,7 +199,7 @@ function Blogs()
     return(
         <>
         <Header/>
-        <Button icon = {<PlusCircleOutlined />} onClick={()=>{addBlog()}}>Add new blog</Button>
+        <Button icon = {<PlusCircleOutlined />}  onClick={()=>{addBlog()}}>Add new blog</Button>
         <Table columns={columns} dataSource={[...blogData]} />
 
         
