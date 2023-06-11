@@ -6,9 +6,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import {useSelector,useDispatch} from 'react-redux'
 import { updateLoginUser } from '../reduxToolkit/loginUserReducer';
 import { fetchUserData } from '../reduxToolkit/userReducer';
-
-
-
+import api from '../environment/data'
 
 
 function LoginUser()
@@ -19,20 +17,32 @@ function LoginUser()
     const [incorrectPasswordCount,setIncorrectPasswordCount] = useState(0);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const [registeredUser, setRegisteredUser] = useState([]);    
+    const [registeredUser, setRegisteredUser] = useState([]);   
+    const [registeredUsers, setRegisteredUsers] = useState([]);  
     const [blockedUser, setBlockedUser] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [status, setStatus] = useState("");
 
-    const { registeredUsers } = useSelector((state)=>state.users)
-    const { status } = useSelector((state)=>state.users)
+  //  const { registeredUsers } = useSelector((state)=>state.users)
+  //  const { status } = useSelector((state)=>state.users)
 
   
     useEffect(()=>{
-      dispatch(fetchUserData())
+     // dispatch(fetchUserData())
+     fetchData()
 
-   },[dispatch])
+   },[])
 
+
+    const fetchData = async ()=>{
+      const res = await api.get("/users")
+      if(res.status === 200){
+        setStatus("success")
+        setRegisteredUsers([...res.data])
+      }
+      
+    }
 
     const handleSubmit = (e) => {
       e.preventDefault();

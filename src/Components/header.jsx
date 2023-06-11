@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+//import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -8,11 +8,20 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Badge } from 'react-bootstrap';
 import { BsFilePost } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
+import {Button} from 'antd';
+import { PoweroffOutlined }
+from '@ant-design/icons';
+import {useNavigate} from "react-router-dom"
 
-function Header({blogCount}) {
+function Header() {
 
-  //useSelector(state=> console.log(state))
   const username = useSelector(state => state.loginUserReducer.loginUser.name)
+  const navigate = useNavigate()
+
+
+  const logout = ()=>{
+    navigate("/")
+  }
 
   return (
     <Navbar bg="light" expand="lg">
@@ -32,17 +41,14 @@ function Header({blogCount}) {
            
           </Nav>
          
-
+          <Button icon= {<PoweroffOutlined />} style={{border: "none"}} >Logout</Button>
           <div style={{ position: 'relative', display: 'inline-block' }}>
-          <BsFilePost size={37} style={{color: 'darkolivegreen'}}/>
-          <Badge pill style={{ position: 'absolute', bottom: -5, right: -5 }}>
-            
-          </Badge>
+          
         </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
-
+//onClick={()=>{editBlog(record)}}
 export default Header;

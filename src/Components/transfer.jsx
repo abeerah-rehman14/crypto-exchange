@@ -3,13 +3,16 @@ import Header from './header';
 import Footer from './footer';
 import { DownOutlined, UserOutlined } from '@ant-design/icons'
 import api from '../environment/data'
+import {useSelector,useDispatch} from 'react-redux'
 import { Button, Form, Input, Space , message,  Dropdown, Select, InputNumber, notification } from 'antd';
+import { updateLoginUser } from '../reduxToolkit/loginUserReducer';
+
 const { Option } = Select;
 
-function Transfer({route,navigation})
+function Transfer()
 {
+    const dispatch = useDispatch();
 
-    const { coinId } = route.params;
 
     const [messageApi, contextHolder] = message.useMessage();
     const key = 'updatable';
@@ -19,39 +22,42 @@ function Transfer({route,navigation})
     const [transferAddress,setTransferAddress] = useState([])
     const [maxAmount,setMaxAmount] = useState(0)
     
+    const { loginUser } = useSelector((state)=>state.loginUserReducer)
+
     
     const getData = async () =>
     {
-        const res = await api.get("/users")
-        console.log(res.data[0])
+     
 
-        setUserData(res.data)
-        setCoinData(res.data[0].coins.map((data)=>{
+        setCoinData(loginUser.coins.map((data,i)=>{
             return {
-                label:data.name,
+                label:data.label,
                 value:data.id,
                 totalAmount:data.totalAmount
             }
         })) 
-        setTransferAddress(res.data[0].transferAddress.map((data)=>{
+        setTransferAddress(loginUser.transferAddress.map((data,i)=>{
             return {
-                label:data.name,
+                label:data.label,
                 value:data.key
             }
-        }))
-        console.log(transferAddress) 
-        console.log(coinData) 
-        console.log(userData)  
+        })) 
 
     }
 
      useEffect(()=>{
-       // getData()
+       getUsersData()
+       getData()
     },[])
 
+    const getUsersData =async () =>{
+      const res = await api.get("/users")
+      setUserData(res.data)
+    }
+
      const setCoinMaxLimit = (coinValue)=>{
-        let amount  = coinData.find(data => data.value === coinValue ).totalAmount
-        setMaxAmount(amount)
+       let amount  = coinData.find(data => data.value === coinValue ).totalAmount
+       setMaxAmount(amount)
 
     }
 
@@ -64,29 +70,31 @@ function Transfer({route,navigation})
 
 
       const updateUserHandler = async (selectedCoin) => {       
-        let payload = {}
-         userData[0]?.coins?.map((data)=>{
+        let loginUserPayload = {}
+
+        loginUser?.coins?.map((data)=>{
+          if(data.id === selectedCoin.coinId)
+          {
+           data.totalAmount = data.totalAmount - selectedCoin.amount
+          }
+        })
+
+        userData[selectedCoin.addressId].coins.map((data)=>{
            if(data.id === selectedCoin.coinId)
            {
-            data.totalAmount = data.totalAmount - selectedCoin.amount
+            data.totalAmount = data.totalAmount + selectedCoin.amount
            }
          })
-         payload = userData[0]
-         userData[selectedCoin.addressId].coins.map((data)=>{
-            if(data.id === selectedCoin.coinId)
-            {
-             data.totalAmount = data.totalAmount + selectedCoin.amount
-            }
-          })
-
-         console.log(userData[0].coins, userData[selectedCoin.addressId].coins)
-         console.log(payload, selectedCoin.addressId)
         
        
-       const response = await api.put(`/users/0`, userData[0]);
+       const response = await api.put(`/users/${loginUser.id}`, loginUser);
+       dispatch(updateLoginUser(loginUser))
        console.log(response)
+
        const res = await api.put(`/users/${selectedCoin.addressId}`, userData[selectedCoin.addressId]);
        console.log(res)
+
+
        if(res.status === 200)
        {
         openMessage()
@@ -112,7 +120,7 @@ function Transfer({route,navigation})
             content: 'Your coins have been transfered successfully!',
             duration: 6,
           });
-        }, 1000);
+        }, 500);
       };
 
    
@@ -120,6 +128,8 @@ function Transfer({route,navigation})
     
     return(
         <>
+        {contextHolder}
+
         <Header/>
         <Space direction="vertical" size="middle" align='center' style={{ display: 'flex' }} >
         <Form

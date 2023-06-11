@@ -4,9 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
-import {toolkitStore} from './reduxToolkit/toolkitStore'
+import {toolkitStore,persistor} from './reduxToolkit/toolkitStore'
 import store from './Components/redux/store'
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
     {/* <Provider store={store}> */}
       <Provider store={toolkitStore}>
-       <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
        </Provider>
     {/* </Provider> */}
     </BrowserRouter>

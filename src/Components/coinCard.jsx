@@ -14,6 +14,7 @@ function CoinCard()
     const [colData,setColData] = useState([])
     const navigate = useNavigate()
     const cols = []
+    let coins = []
     
     //useSelector(state => console.log(state))
  
@@ -23,11 +24,11 @@ function CoinCard()
     
     const getData = async () =>
     {
-        console.log(loginUser.coins)
-        setCoinData([])
+        coins=[]
         loginUser?.coins?.forEach(element => {
-            coinData.push(element)      
-        });  
+             coins.push(element)      
+        })
+        setCoinData(coins)
     }
 
     const setCoinLayout = () =>
@@ -51,26 +52,15 @@ function CoinCard()
     },[])
 
 
-    const tranfer = (coinId) =>
+    const tranfer = () =>
     {
-        navigate("/transferCoin",{coinId:coinId})
+        navigate("/transferCoin")
 
 
     }
 
     return(
         <>
-        {/* <p>{user[0]?.name}</p> */}
-         {/* <Space
-            direction="horizontal"
-            size="middle"
-            style={{
-            display: 'flex',
-            }}>  */}
-            {/* <Row gutter={[24, 16]}>
-                {colData}
-            </Row> */}
-   
             <Row gutter={[16, 8]}>
             {
              coinData && coinData?.map((coin,i)=>{
