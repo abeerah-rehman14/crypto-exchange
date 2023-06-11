@@ -1,32 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {toolkitStore,persistor} from './reduxToolkit/toolkitStore'
-import store from './Components/redux/store'
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import reportWebVitals from './reportWebVitals';
+import {toolkitStore,persistor} from './reduxToolkit/toolkitStore'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const root = createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    {/* <Provider store={store}> */}
-      <Provider store={toolkitStore}>
+    <Provider store={toolkitStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <Routes>
-          <Route path="/*" element={ <App /> }>
-          </Route>
-        </Routes>      
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </PersistGate>
-      </Provider>
-    {/* </Provider> */}
-    </BrowserRouter>
-  
+    </Provider>
   </React.StrictMode>
 );
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
