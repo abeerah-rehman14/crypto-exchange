@@ -66,7 +66,7 @@ function CoinCard()
              coinData && coinData?.map((coin,i)=>{
                 return(
                 <Col key={i} span={12}> 
-                <Card title={coin.name} size="small">
+                <Card title={coin.label} size="small" color="blue">
                 <h6>Total Count</h6>
                 <p>{coin.totalAmount}</p>
                 <Button onClick={tranfer} style={{ color: "green" }}>Transfer</Button>
@@ -83,5 +83,4 @@ function CoinCard()
         </>
     )
 }
-
-export default CoinCard;
+export default React.memo(CoinCard);

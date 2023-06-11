@@ -18,7 +18,7 @@
           "id": 1,
           "key": 1,
           "label": "Altcoin",
-          "totalAmount": 800
+          "totalAmount": 900
         }
       ],
       "transferAddress": [
@@ -58,7 +58,7 @@
     },
     {
       "id": 3,
-      "name": "Abeerah Rehman",
+      "name": "Sara Khan",
       "email": "test@user.com",
       "password": "0123456789",
       "address": "cbc",
@@ -73,7 +73,7 @@
           "id": 1,
           "key": 1,
           "label": "Altcoin",
-          "totalAmount": 800
+          "totalAmount": 700
         }
       ],
       "transferAddress": [

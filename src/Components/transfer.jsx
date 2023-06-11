@@ -71,10 +71,12 @@ function Transfer()
 
       const updateUserHandler = async (selectedCoin) => {       
         let loginUserPayload = {}
+        console.log(loginUser)
 
         loginUser?.coins?.map((data)=>{
           if(data.id === selectedCoin.coinId)
           {
+            console.log(data)
            data.totalAmount = data.totalAmount - selectedCoin.amount
           }
         })
@@ -130,7 +132,7 @@ function Transfer()
         <>
         {contextHolder}
 
-        <Header/>
+      
         <Space direction="vertical" size="middle" align='center' style={{ display: 'flex' }} >
         <Form
         form={form}
@@ -214,7 +216,6 @@ function Transfer()
     </Form>  
     </Space>      
     
-  <Footer/>
 
 
         </>

@@ -55,8 +55,6 @@ function Dashboard()
         {
             setCoinDetails(res.data)
         }
-
-
     }
 
 
@@ -67,7 +65,7 @@ function Dashboard()
 
     return(
         <>
-        <Header/>
+      
         <Row gutter={16}>
         <Col span={4} offset={6}>
         <Statistic title="BITCOIN" value={coinRates?.BTC} precision={2}/>
@@ -84,14 +82,13 @@ function Dashboard()
         </Row>
         <br></br>
 
-            <CoinCard></CoinCard>
+        <CoinCard></CoinCard>
 
         <br></br>
         <Navbar.Brand style={{fontSize: "24px",paddingBottom:"20px"}}>Market Rates</Navbar.Brand> 
         {/* <Button style={{ paddingLeft:"100px"}} >Refresh</Button>        */}
         <Table columns={columns} dataSource={[...coinDetails]} rowKey={record => record.firstId} />
 
-        {/* <Footer/> */}
         </>
     )
 }

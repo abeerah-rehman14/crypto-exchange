@@ -1,32 +1,30 @@
 import React from "react";
-//import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Badge } from 'react-bootstrap';
-import { BsFilePost } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {Button} from 'antd';
 import { PoweroffOutlined }
 from '@ant-design/icons';
+import { logoutUser } from '../reduxToolkit/loginUserReducer';
 import {useNavigate} from "react-router-dom"
 
 function Header() {
 
   const username = useSelector(state => state.loginUserReducer.loginUser.name)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
 
   const logout = ()=>{
+    dispatch(logoutUser())
     navigate("/")
   }
 
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand>Welcome to Crypto Exchange, {username}  !</Navbar.Brand>
+        <Navbar.Brand>Welcome to Crypto Exchange, {username}!</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -41,7 +39,7 @@ function Header() {
            
           </Nav>
          
-          <Button icon= {<PoweroffOutlined />} style={{border: "none"}} >Logout</Button>
+          <Button icon= {<PoweroffOutlined />} style={{border: "none"}} onClick={ logout}>Logout</Button>
           <div style={{ position: 'relative', display: 'inline-block' }}>
           
         </div>

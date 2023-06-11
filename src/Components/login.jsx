@@ -50,7 +50,6 @@ function LoginUser()
 
 
       if(status === "success"){
-        console.log("here")
          registeredUsers.forEach(element => {
           registeredUser.push(element)          
          });

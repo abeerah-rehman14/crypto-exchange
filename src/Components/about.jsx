@@ -1,24 +1,23 @@
 import React from 'react';
-import Header from './header';
-import Footer from './footer';
 
 function About()
 {
 
     return(
         <>
-        <Header/>
         <p>This application is build using React Js.
-            The major react components used to build this app are
-            <li>
-                <ul>Redux</ul>
-                <ul>Redux Toolkit</ul>
-                <ul>Ant design (for all designs,forms)</ul>
-                <ul>React Router Dom</ul>
-                <ul>React hooks</ul>
-            </li>
-        </p>
-        <Footer/>
+            The major react components used to build this app are: </p>
+            <ul>
+                <li>Redux</li>
+                <li>Redux Toolkit</li>
+                <li>Redux Persist</li>
+                <li>Ant design</li>
+                <li>React Router Dom</li>
+                <li>Protected Routes</li>
+                <li>React hooks</li>
+                <li>React Memo</li>
+            </ul>
+        
         </>
     )
 }

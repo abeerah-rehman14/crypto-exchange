@@ -16,9 +16,7 @@ function Home()
     })
     return(
         <>
-        <Header/>
-        <p>Home in progress</p>
-        <Footer/>
+        <p>Home is in progress</p>
         </>
     )
 }

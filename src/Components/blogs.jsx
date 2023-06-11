@@ -198,7 +198,6 @@ function Blogs()
     
     return(
         <>
-        <Header/>
         <Button icon = {<PlusCircleOutlined />}  onClick={()=>{addBlog()}}>Add new blog</Button>
         <Table columns={columns} dataSource={[...blogData]} />
 
@@ -367,7 +366,6 @@ function Blogs()
           )}
 
         
-        <Footer/>
         </>
     )
     
