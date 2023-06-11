@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Space , Col, Row, Slider  } from 'antd';
-import Header from './header';
-import Footer from './footer';
-import api from '../environment/data'
 import {useNavigate} from "react-router-dom"
 import {useSelector,useDispatch} from 'react-redux'
 import {getUser} from '../reduxToolkit/userReducer'

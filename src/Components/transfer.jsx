@@ -1,13 +1,9 @@
 import React, { useState, useEffect }  from 'react';
-import Header from './header';
-import Footer from './footer';
-import { DownOutlined, UserOutlined } from '@ant-design/icons'
 import api from '../environment/data'
 import {useSelector,useDispatch} from 'react-redux'
-import { Button, Form, Input, Space , message,  Dropdown, Select, InputNumber, notification } from 'antd';
+import { Button, Form, Space , message, Select, InputNumber } from 'antd';
 import { updateLoginUser } from '../reduxToolkit/loginUserReducer';
 
-const { Option } = Select;
 
 function Transfer()
 {
@@ -70,7 +66,6 @@ function Transfer()
 
 
       const updateUserHandler = async (selectedCoin) => {       
-        let loginUserPayload = {}
         console.log(loginUser)
 
         loginUser?.coins?.map((data)=>{

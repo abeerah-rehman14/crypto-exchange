@@ -1,10 +1,7 @@
 
 import React, { useEffect , useState }from 'react';
-import { Table, Tag, Button, Modal , Form, Input, Alert, Space} from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Table, Button, Modal , Form, Input, Alert, Space} from 'antd';
 import { ExclamationCircleFilled,PlusCircleOutlined, EyeTwoTone, DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import Header from './header';
-import Footer from './footer';
 const { confirm } = Modal;
 
 const data = [

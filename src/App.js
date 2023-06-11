@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useState, useEffect, Component } from "react";
-import {BrowserRouter as Router,Routes, Route} from 'react-router-dom'
+import React from "react";
+import {BrowserRouter as Routes, Route} from 'react-router-dom'
 import RegisterUser from './Components/register';
 import Blogs from './Components/blogs'
 import Dashboard  from './Components/dashboard';
