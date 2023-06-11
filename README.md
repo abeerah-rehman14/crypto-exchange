@@ -25,16 +25,15 @@ Blogs tab has been added which allow user to perform CRUD operations on static b
 ![blogCrud](https://github.com/abeerah-rehman14/crypto-exchange/assets/134891256/8862549f-4018-4637-9a5b-b41003ec4650)
 
 ### `Phase 3`
-Proper dashboard has been made which displays the live coin rate and user purchased coin. Also allow the user to transfer his coins to other available user.
- ### redux toolkit, persit-redux is used to maintain the state of login user. Axios is used for api calling. Json-server is used to store data in db.json
- binance api has been used for live coin rates.
+Proper dashboard has been made which displays the live coin rate and user purchased coin. Also allow the user to transfer his coins to other available user. Coins are deducted from login user account and added to the receipient account. 
+ ### redux toolkit, persit-redux is used to maintain the state of login user. Axios is used for api calling. Json-server is used to store data in db.json. Binance api has been used for live coin rates.
 
 ![dashboard](https://github.com/abeerah-rehman14/crypto-exchange/assets/134891256/0a616663-3534-4469-9088-36b0f2150bcf)
 ![transferCoin](https://github.com/abeerah-rehman14/crypto-exchange/assets/134891256/a70ebda9-b21d-4e20-9645-813d05997855)
 
 ### `Phase 4`
-Routes are defined as protected now, code optimization techniques have been used and deployment porcess is completed.
- ### siblings components andr react.memo is used, protectd routes are used for logged in users
+Routes are defined as protected now, code optimization techniques have been used and deployment process is completed.
+ ### siblings components and react.memo is used to optimize code, protected routes are used for loggedin users
 
 
 
