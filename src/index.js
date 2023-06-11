@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {toolkitStore,persistor} from './reduxToolkit/toolkitStore'
 import store from './Components/redux/store'
 import { Provider } from 'react-redux';
@@ -16,9 +16,12 @@ root.render(
     {/* <Provider store={store}> */}
       <Provider store={toolkitStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <Routes>
+          <Route path="/*" element={ <App /> }>
+          </Route>
+        </Routes>      
       </PersistGate>
-       </Provider>
+      </Provider>
     {/* </Provider> */}
     </BrowserRouter>
   
