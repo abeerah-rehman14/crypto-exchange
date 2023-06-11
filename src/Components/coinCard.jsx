@@ -51,7 +51,7 @@ function CoinCard()
 
     const tranfer = () =>
     {
-        navigate("/transferCoin")
+        navigate("/main/transferCoin")
 
 
     }

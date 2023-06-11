@@ -69,17 +69,18 @@ function Dashboard()
         <Statistic title="BITCOIN" value={coinRates?.BTC} precision={2}/>
         </Col>
         <Col span={4}>
-        <Statistic title="LITECOIN" value={coinRates?.LTC} precision={2} />
+        <Statistic title="ALTCOIN" value={coinRates?.ALT} precision={2} />
         </Col>
         <Col span={4}>
         <Statistic title="ETHEREUM" value={coinRates?.ETH} precision={2} />
-        <Button style={{ marginTop: 16,}} >
+        {/* <Button style={{ marginTop: 16,}} >
         Refresh
-        </Button>
+        </Button> */}
         </Col>
         </Row>
         <br></br>
 
+        <Navbar.Brand style={{fontSize: "24px",paddingBottom:"20px"}}>Purchased Coins</Navbar.Brand>
         <CoinCard></CoinCard>
 
         <br></br>

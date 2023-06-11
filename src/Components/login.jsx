@@ -68,7 +68,7 @@ function LoginUser()
         {
           showSuccessAlert()
           dispatch(updateLoginUser(loginUser))
-          navigate("/dashboard")
+          navigate("/main")
         }
         else{
           setIncorrectPasswordCount(incorrectPasswordCount+1)

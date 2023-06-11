@@ -32,10 +32,10 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/blogs">Blogs</Nav.Link>
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/main">Dashboard</Nav.Link>
+            <Nav.Link href="/main/blogs">Blogs</Nav.Link>
+            <Nav.Link href="/main/home">Home</Nav.Link>
+            <Nav.Link href="/main/about">About</Nav.Link>
            
           </Nav>
          
