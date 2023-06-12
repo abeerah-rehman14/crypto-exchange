@@ -13,6 +13,7 @@ function CoinCard()
     const cols = []
     let coins = []
     
+    
     //useSelector(state => console.log(state))
  
     const { loginUser } = useSelector((state)=>state.loginUserReducer)

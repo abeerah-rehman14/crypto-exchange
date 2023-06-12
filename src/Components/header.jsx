@@ -38,7 +38,6 @@ function Header() {
             <Nav.Link href="/main/about">About</Nav.Link>
            
           </Nav>
-         
           <Button icon= {<PoweroffOutlined />} style={{border: "none"}} onClick={ logout}>Logout</Button>
           <div style={{ position: 'relative', display: 'inline-block' }}>
           

@@ -39,8 +39,6 @@ const data = [
 
 function Blogs()
 {
-  
-    
 
     let item =  {
         key: 0,

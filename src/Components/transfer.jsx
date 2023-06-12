@@ -9,7 +9,6 @@ function Transfer()
 {
     const dispatch = useDispatch();
 
-
     const [messageApi, contextHolder] = message.useMessage();
     const key = 'updatable';
     const [form] = Form.useForm();

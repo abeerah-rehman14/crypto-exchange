@@ -40,7 +40,6 @@ function Dashboard()
       ];
     const dispatch = useDispatch();
 
-
     const [coinRates,setCoinRates] = useState({})
     const [coinDetails,setCoinDetails] = useState([])
 

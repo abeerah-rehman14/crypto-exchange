@@ -27,7 +27,6 @@ function LoginUser()
   //  const { registeredUsers } = useSelector((state)=>state.users)
   //  const { status } = useSelector((state)=>state.users)
 
-  
     useEffect(()=>{
      // dispatch(fetchUserData())
      fetchData()
