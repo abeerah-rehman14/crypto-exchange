@@ -35,6 +35,6 @@ Proper dashboard has been made which displays the live coin rate and user purcha
 Routes are defined as protected now, code optimization techniques have been used and deployment process is completed.
  ### siblings components and react.memo is used to optimize code, protected routes are used for loggedin users
 
+https://crypto-exchange-otg.netlify.app/
 
-
-
+![netlify-dashboard](https://github.com/abeerah-rehman14/crypto-exchange/assets/134891256/b5c5958b-17b4-427c-ad4b-0bff6ddfe1d0)
