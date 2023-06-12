@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Header from './header';
-import Footer from './footer';
 import api from '../environment/data'
 
 function Home()

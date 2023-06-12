@@ -144,6 +144,7 @@ function LoginUser()
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
+                required
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -154,6 +155,7 @@ function LoginUser()
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
+                required
                 placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

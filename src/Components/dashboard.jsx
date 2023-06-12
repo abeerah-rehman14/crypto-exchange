@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Header from './header';
-import Footer from './footer';
 import CoinCard from './coinCard';
 import { Button, Col, Row, Statistic ,Table} from 'antd';
 import axios from 'axios';

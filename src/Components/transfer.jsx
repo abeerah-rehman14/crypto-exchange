@@ -1,6 +1,5 @@
 import React, { useState, useEffect }  from 'react';
 import Header from './header';
-import Footer from './footer';
 import { DownOutlined, UserOutlined } from '@ant-design/icons'
 import api from '../environment/data'
 import {useSelector,useDispatch} from 'react-redux'
