@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CoinCard from './CoinCard';
+import CoinCard from './coinCard';
 import { Button, Col, Row, Statistic ,Table} from 'antd';
 import axios from 'axios';
 import api from '../environment/data'
