@@ -7,7 +7,7 @@ import {Button} from 'antd';
 import { PoweroffOutlined }
 from '@ant-design/icons';
 import { logoutUser } from '../reduxToolkit/loginUserReducer';
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 
 function Header() {
 
@@ -34,7 +34,7 @@ function Header() {
           >
             <Nav.Link href="/main">Dashboard</Nav.Link>
             <Nav.Link href="/main/blogs">Blogs</Nav.Link>
-            <Nav.Link href="/main/home">Home</Nav.Link>
+            <Link to="/main/home">Home</Link>
             <Nav.Link href="/main/about">About</Nav.Link>
            
           </Nav>

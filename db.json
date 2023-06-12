@@ -58,7 +58,7 @@
     },
     {
       "id": 3,
-      "name": "Sara Khan",
+      "name": "Abeerah Rehman",
       "email": "test@user.com",
       "password": "0123456789",
       "address": "cbc",
@@ -86,6 +86,38 @@
           "key": 1,
           "label": "Andrew Ng",
           "value": "81SS0"
+        }
+      ]
+    },
+    {
+      "name": "Test User",
+      "email": "user@test.com",
+      "password": "0123456789",
+      "address": "house # 22",
+      "cnic": "C:\\fakepath\\Session-4.pdf",
+      "id": 4,
+      "coins": [
+        {
+          "id": 0,
+          "key": 0,
+          "label": "Bitcoin",
+          "totalAmount": 758
+        },
+        {
+          "id": 1,
+          "key": 1,
+          "label": "Altcoin",
+          "totalAmount": 800
+        }
+      ],
+      "transferAddress": [
+        {
+          "key": 0,
+          "label": "Allen Walker"
+        },
+        {
+          "key": 1,
+          "label": "Andrew Ng"
         }
       ]
     }
