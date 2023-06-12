@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LoginUser from './Components/Login';
-import RegisterUser from './Components/Register';
-import Layout from './Components/Layout';
+import LoginUser from './Components/login';
+import RegisterUser from './Components/register';
+import Layout from './Components/layout';
 import ProtectedRoutes from './ProtectedRoutes';
-import Dashboard from './Components/Dashboard';
-import Transfer from './Components/Transfer';
-import About from './Components/About';
-import Home from './Components/Home';
-import NotFound from './Components/NotFound';
-import Blogs from './Components/Blogs'
+import Dashboard from './Components/dashboard';
+import Transfer from './Components/transfer';
+import About from './Components/about';
+import Home from './Components/home';
+import NotFound from './Components/notFound';
+import Blogs from './Components/blogs'
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
